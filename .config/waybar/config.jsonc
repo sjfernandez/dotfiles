@@ -1,0 +1,168 @@
+{
+	"layer": "top",
+	"modules-left": ["custom/launcher","cpu","memory","disk","hyprland/workspaces"],
+	"modules-center": ["clock"],
+	"modules-right": ["privacy","idle_inhibitor","hyprland/language","network","pulseaudio","custom/notification","custom/power"],
+	
+	"pulseaudio": {
+		"tooltip": false,
+		"scroll-step": 5,
+		"format": "{icon}  {volume}%",
+		"format-muted": "muted",
+		"on-click":"pactl set-sink-mute @DEFAULT_SINK@ toggle",
+		"format-icons": {
+			"default": ["", "", ""]
+		}
+	},
+
+    "disk": {
+        "interval": 30,
+        "format": "  {percentage_used}%",
+        "path": "/"
+    },
+    "privacy": {
+        "icon-spacing": 10,
+        "icon-size": 18,
+        "transition-duration": 250,
+        "tooltip": false,
+        "modules": [
+            {
+                "type": "screenshare",
+                "tooltip": true,
+                "tooltip-icon-size": 24
+            },
+            {
+                "type": "audio-out",
+                "tooltip": true,
+                "tooltip-icon-size": 24
+            },
+            {
+                "type": "audio-in",
+                "tooltip": true,
+                "tooltip-icon-size": 24
+            }
+        ]
+    },
+    "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+        "activated": " not idle",
+        "deactivated": " idle"
+    }
+},
+
+    "hyprland/language": {
+        "format": "  {1}",
+        "tooltip": false
+    },
+    "cpu": {
+        "interval": 15,
+        "format": "  {}%",
+        "max-length": 10
+    },
+    "memory": {
+        "interval": 30,
+        "format": "  {}%",
+        "max-length": 10
+    },
+    "custom/launcher":{
+        "format": " ",
+        "on-click": "rofi -show drun",
+        "on-click-right": "killall rofi",
+        "tooltip": false
+    },
+     "custom/power":{
+        "format": "⏻ ",
+        "tooltip": false,
+        "on-click": "bash ~/.config/rofi/powermenu.sh",
+        "on-click-right": "killall rofi"
+    },
+    "clock": {
+        "format": "{:%A, %B %d, %Y (%R)}  ",
+	"format-alt": "{:%H:%M}  ",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+                    "mode"          : "year",
+                    "mode-mon-col"  : 3,
+                    "weeks-pos"     : "right",
+                    "on-scroll"     : 1,
+                    "on-click-right": "mode",
+                    "format": {
+                              "months":     "<span color='#ffead3'><b>{}</b></span>",
+                              "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+                              "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+                              "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+                              "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+                              }
+                    },
+        "actions":  {
+                    "on-click-right": "mode",
+                    "on-click-forward": "tz_up",
+                    "on-click-backward": "tz_down",
+                    "on-scroll-up": "shift_up",
+                    "on-scroll-down": "shift_down"
+                    }
+    }, 
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "tooltip": false,
+        "format-icons": {
+            "1": "",
+            "2": "",
+            "3": "",
+            "4": "",
+            "5": "",
+            "urgent": "",
+            "active": "",
+            "default": ""
+    }
+    },
+    "custom/notification": {
+        "tooltip": false,
+        "format": "{icon}",
+        "format-icons": {
+            "notification": "<span foreground='red'><sup></sup></span>",
+            "none": "",
+            "dnd-notification": "<span foreground='red'><sup></sup></span>",
+            "dnd-none": ""
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "sleep 0.15 && swaync-client -t -sw",
+        "on-click-right": "sleep 0.15 && swaync-client -d -sw",
+        "escape": true
+    },
+    "tray": {
+        "icon-size": 15,
+        "spacing": 15
+    },
+//    "custom/notification": {
+//     "tooltip": false,
+//     "format": "{icon}",
+//     "format-icons": {
+//       "notification": "<span foreground='red'><sup></sup></span>",
+//       "none": "",
+//       "dnd-notification": "<span foreground='red'><sup></sup></span>",
+//       "dnd-none": "",
+//       "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+//       "inhibited-none": "",
+//       "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+//       "dnd-inhibited-none": ""
+//     },
+//     "return-type": "json",
+//     "exec-if": "which swaync-client",
+//     "exec": "swaync-client -swb",
+//     "on-click": "swaync-client -t -sw",
+//     "on-click-right": "swaync-client -d -sw",
+//     "escape": true
+//   },
+    "network": {
+        "interface": "wlan0",
+        "format-wifi": "{essid} ({signalStrength}%)",
+        "format-ethernet": "  {ipaddr}/{cidr}",
+        "format-disconnected": "disconnected",
+        "tooltip": false,
+        "max-length": 50
+    }
+}
